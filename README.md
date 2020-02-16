@@ -20,4 +20,4 @@ We use the following packages/libraries:
 
 --> Re standard library
 
---> Imgur API
+--> Imgur API for posting images on Imgur
