@@ -81,8 +81,18 @@ def get_face(image):
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
     return eye_list
 
+def resize_img(filename):
+    oriimg = cv2.imread(filename)
+    W = 1000.
+    _, width, _ = oriimg.shape
+    imgScale = W/width
+    newX,newY = oriimg.shape[1]*imgScale, oriimg.shape[0]*imgScale
+    newimg = cv2.resize(oriimg,(int(newX),int(newY)))
+    filename = "new" + filename
+    cv2.imwrite(filename,newimg)
 
-show_camera()
+
+# show_camera()
 eye_list = get_face(testImage)
+resize_img(testImage)
 print(eye_list)
-
