@@ -19,3 +19,5 @@ We use the following packages/libraries:
 --> Time standard library
 
 --> Re standard library
+
+--> Imgur API
