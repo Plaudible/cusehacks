@@ -81,8 +81,8 @@ def get_face(image):
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
     return eye_list
 
-
-show_camera()
-eye_list = get_face(testImage)
-print(eye_list)
+if __name__ == "__main__":
+    show_camera()
+    eye_list = get_face(testImage)
+    print(eye_list)
 
