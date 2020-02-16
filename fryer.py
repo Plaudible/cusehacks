@@ -2,7 +2,6 @@ from PIL import Image
 import requests
 from io import BytesIO
 import urllib.request
-#import numpy as np
 from face import get_face
 from random import uniform
 from random import randint
@@ -19,17 +18,32 @@ noise_high = .4
 
 eye = Image.open('eye.png').convert("RGBA")
 eye_width, eye_height = eye.size
+# print(eye_width)
+# print(eye_height)
 
 def readIMG(url):
     return Image.open(urllib.request.urlopen(url))
+
+def downloadURL(url,filename='download.png'):
+    i = Image.open(urllib.request.urlopen(url))
+    i.save(filename)
 
 def getIMG(path):
     return Image.open(path).convert("RGBA")
 
 def place(img,points):
-    eye_temp = eye
     for (x,y,r) in points:
-        img.paste(eye,(x-int(eye_width/2),y-int(eye_height/2)),eye)
+        eye_temp = eye
+        i = ((18.0*r)/eye_width)
+        j = ((18.0*r)/eye_height)
+        # print(i)
+        # print(j)
+        # print(eye_width*i)
+        # print(eye_height*j)
+        maxsize = (eye_width*i,eye_height*j)
+        eye_temp.thumbnail(maxsize)
+        temp_width, temp_height = eye_temp.size
+        img.paste(eye,(x-int(temp_width/2),y-int(temp_height/2)),eye)
     return img
 
 def contrast(img,lvl=randint(contrast_low,contrast_high)):
@@ -85,17 +99,26 @@ def fry(img):
     img = noise(img)
     return img
 
-if __name__ == "__main__":
-    url = 'https://i.imgur.com/26Hs09m.jpg'
-    path = 'g.jpeg'
-    l = get_face(path)
-    print(l)
-    t0 = time.time()
-    img = place(getIMG(path),l)
+def doBot(url):
+    img = readIMG(url)
+    path = 'frythis.png'
+    downloadURL(url,path)
+    points = get_face(path)
+    img = place(img,points)
     img = fry(img)
-    t1 = time.time()
-    img.save('out4.png')
-    print('Time to out: ', t1-t0)
+    return img
+
+if __name__ == "__main__":
+    # url = 'https://i.imgur.com/26Hs09m.jpg'
+    # path = 'g.jpeg'
+    # l = get_face(path)
+    # print(l)
+    # t0 = time.time()
+    # img = place(getIMG(path),l)
+    # img = fry(img)
+    # t1 = time.time()
+    # img.save('out4.png')
+    # print('Time to out: ', t1-t0)
 
     # img = brightness(img,.4)
     # img = contrast(img,high)
@@ -109,11 +132,14 @@ if __name__ == "__main__":
 
     # for i in a:
     #     img = noise(img,i)
-    # img = getIMG('yeet.jpg')
-    # img = brightness(img,-.20)
-    # img = contrast(img,contrast_high+100)
-    # img = noise(img,.4)
+    img = getIMG('g.jpeg')
+    l = get_face('g.jpeg')
+    img = place(img,l)
+    img = fry(img)
+    #img = brightness(img,-.20)
+    #img = contrast(img,contrast_high+100)
+    #img = noise(img,.4)
     # # img = sharpen(img)
     # # img.save('out'+str(a.index(i))+'.png')
     # # print(type(img))
-    # img.save('out2.png')
+    img.save('out2.png')

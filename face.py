@@ -91,8 +91,8 @@ def resize_img(filename):
     filename = "new" + filename
     cv2.imwrite(filename,newimg)
 
-
-# show_camera()
-eye_list = get_face(testImage)
-resize_img(testImage)
-print(eye_list)
+if __name__ == "__main__":
+    show_camera()
+    eye_list = get_face(testImage)
+    resize_img(testImage)
+    print(eye_list)
