@@ -1,7 +1,7 @@
 # Lazybot
 Cusehacks 2020 project by: Maxwell Bockmann, Joshua Park, Tim Kilmer, Lucio Chen, Dounglan Cheung
 
-Lazybot is a bot that takes images as an input and uses a facial recognition API to place lazers on the eyes then deep fry the image.
+Lazybot is a bot that takes an image as an input and uses a facial recognition API to place lazers on the eyes then deep fries the image.
 Lazybot is based on Reddit and can be called to a post or comment by typing "/u/lazer_eye_bot" or "/u/lazer_eye_bot [image url]".
 
 We use the following packages/libraries:
