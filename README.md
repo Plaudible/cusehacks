@@ -1,4 +1,7 @@
 # Lazybot
+
+DEMO HERE: https://luciochen.com/cusehack/
+
 Cusehacks 2020 project by: Maxwell Bockmann, Joshua Park, Tim Kilmer, Lucio Chen, Dounglan Cheung
 
 Lazybot is a bot that takes an image as an input and uses a facial recognition API to place lazers on the eyes then deep fries the image.
